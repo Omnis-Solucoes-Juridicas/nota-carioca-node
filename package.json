@@ -1,0 +1,18 @@
+{
+  "name": "nota-carioca",
+  "version": "1.0.0",
+  "description": "Módulo para emissão de nota fiscal eletrônica no nota carioca.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nota",
+    "carioca",
+    "nota",
+    "fiscal",
+    "nfe"
+  ],
+  "author": "Jonathan Souza",
+  "license": "GPL-3.0"
+}
