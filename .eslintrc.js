@@ -1,6 +1,3 @@
-const path = require('path');
-const rootDir = __dirname;
-
 module.exports = {
     extends: [
         'eslint:recommended',
@@ -51,23 +48,4 @@ module.exports = {
         'promise/no-promise-in-callback': 'warn',
         'promise/no-callback-in-promise': 'warn',
     },
-    settings: {
-        'import/resolver': {
-            alias: {
-                map: [
-                    ['tests/*', path.join(rootDir, 'tests')],
-                    ['app/*', path.join(rootDir, 'app')],
-                ],
-                extensions: ['.js', '.json'],
-            },
-        },
-    },
-    overrides: [
-        {
-            files: ['tests/**/*.js'],
-            rules: {
-                'no-unused-expressions': 'off',
-            },
-        },
-    ],
 };
