@@ -1,6 +1,6 @@
 const ConsultarNotaCarioca = require('../lib/services/ConsultarNotaCarioca');
-const SoapHandler = require('../lib/utils/SoapHandler');
 const getPathFromRoot = require('../lib/utils/getPathFromRoot');
+const SoapHandler = require('../lib/utils/SoapHandler');
 
 const rps = {
     Prestador: {

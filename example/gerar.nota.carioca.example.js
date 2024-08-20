@@ -17,6 +17,17 @@ const rps = {
         Valores: {
             ValorServicos: '100.00',
             IssRetido: '2.00',
+            ValorDeducoes: '0.00',
+            ValorPis: '0.00',
+            ValorCofins: '0.00',
+            ValorInss: '0.00',
+            ValorIr: '0.00',
+            ValorCsll: '0.00',
+            ValorIss: '0.00',
+            OutrasRetencoes: '0.00',
+            Aliquota: '0.00',
+            DescontoIncondicionado: '0.00',
+            DescontoCondicionado: '0.00',
         },
         ItemListaServico: '1.07',
         CodigoTributacaoMunicipio: '522310000',
@@ -28,9 +39,21 @@ const rps = {
         InscricaoMunicipal: '12345678'
     },
     Tomador: {
-        CpfCnpj: {
-            Cnpj: '98051666000173'
-        }
+        IdentificacaoTomador: {
+            CpfCnpj: {
+                Cnpj: '98051666000173'
+            }
+        },
+        RazaoSocial: 'Tomador de Teste',
+        Endereco: {
+            Endereco: 'Rua do Tomador',
+            Numero: '123',
+            Complemento: 'Sala 101',
+            Bairro: 'Centro',
+            CodigoMunicipio: '3304557',
+            Uf: 'RJ',
+            Cep: '20000000'
+        },
     }
 };
 
