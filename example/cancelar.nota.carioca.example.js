@@ -1,6 +1,6 @@
 const CancelarNota = require('../lib/services/CancelarNota');
-const SoapHandler = require('../lib/utils/SoapHandler');
 const getPathFromRoot = require('../lib/utils/getPathFromRoot');
+const SoapHandler = require('../lib/utils/SoapHandler');
 
 const rps = {
     Pedido: {

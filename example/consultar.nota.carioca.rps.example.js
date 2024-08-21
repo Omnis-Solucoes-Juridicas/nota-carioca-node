@@ -1,6 +1,6 @@
 const ConsultarNotaCariocaRPS = require('../lib/services/ConsultarNotaCariocaRPS');
-const SoapHandler = require('../lib/utils/SoapHandler');
 const getPathFromRoot = require('../lib/utils/getPathFromRoot');
+const SoapHandler = require('../lib/utils/SoapHandler');
 
 const rps = {
     IdentificacaoRps: {
