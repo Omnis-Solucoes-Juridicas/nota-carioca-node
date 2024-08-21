@@ -16,13 +16,13 @@ const rps = {
     Servico: {
         Valores: {
             ValorServicos: '100.00',
-            IssRetido: '2.00',
             ValorDeducoes: '0.00',
             ValorPis: '0.00',
             ValorCofins: '0.00',
             ValorInss: '0.00',
             ValorIr: '0.00',
             ValorCsll: '0.00',
+            IssRetido: '2.00',
             ValorIss: '0.00',
             OutrasRetencoes: '0.00',
             Aliquota: '0.00',
