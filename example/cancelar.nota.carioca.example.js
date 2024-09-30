@@ -4,7 +4,7 @@ const SoapHandler = require('../lib/utils/SoapHandler');
 
 const rps = {
     Pedido: {
-        InfPedidoCancelamento:{
+        InfPedidoCancelamento: {
             IdentificacaoNfse: {
                 Numero: '123456',
                 Cnpj: '12345678901234',
@@ -13,18 +13,32 @@ const rps = {
             },
             CodigoCancelamento: '1',
         },
-        InscricaoMunicipal: '12345678'
     }
 };
 
-const certPath = getPathFromRoot('certificado-teste.pfx');
+(async () => {
 
-const cnc = new CancelarNota('dev', rps);
+    const certPath = await getPathFromRoot('certificado-teste.pfx');
 
-const sh = new SoapHandler({ certPath: certPath, certPass: '123456' });
+    try {
 
-sh.send(cnc).then((response) => {
-    console.log('sucesso: ', response);
-}).catch((error) => {
-    console.error('erro: ', error);
-});
+        const cnc = new CancelarNota('dev', rps);
+
+        const sh = new SoapHandler({ certPath: certPath, certPass: '123456' });
+
+        const responseXML = await sh.send(cnc);
+
+        console.log(responseXML);
+
+        const responseJson = sh.convertXmlToJson(responseXML);
+        const responseNota = sh.convertXmlToJson(responseJson['soap:Envelope']['soap:Body'][0].CancelarNfseResponse[0].outputXML);
+
+        console.log(responseNota.CancelarNfseResposta.Cancelamento[0].Confirmacao[0].DataHoraCancelamento);
+
+        console.log('Nota cancelada com sucesso!');
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+})();

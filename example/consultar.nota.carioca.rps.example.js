@@ -14,14 +14,29 @@ const rps = {
     }
 };
 
-const certPath = getPathFromRoot('certificado-teste.pfx');
+(async () => {
 
-const cnc = new ConsultarNotaCariocaRPS('dev', rps);
+    const certPath = await getPathFromRoot('certificado-teste.pfx');
 
-const sh = new SoapHandler({ certPath: certPath, certPass: '123456' });
+    try {
+        const cnc = new ConsultarNotaCariocaRPS('dev', rps);
 
-sh.send(cnc).then((response) => {
-    console.log('sucesso: ', response);
-}).catch((error) => {
-    console.error('erro: ', error);
-});
+        const sh = new SoapHandler({ certPath: certPath, certPass: '123456' });
+
+        const responseXML = await sh.send(cnc);
+
+        console.log(responseXML);
+
+        const responseJson = sh.convertXmlToJson(responseXML);
+
+        const responseNota = sh.convertXmlToJson(responseJson['soap:Envelope']['soap:Body'][0].ConsultarNfsePorRpsResponse[0].outputXML);
+
+        console.log(responseNota.ConsultarNfseRpsResposta.CompNfse[0].Nfse[0].InfNfse);
+
+        console.log('Nota consultada por RPS com sucesso!');
+
+    } catch (e) {
+        console.log(e)
+    }
+
+})();

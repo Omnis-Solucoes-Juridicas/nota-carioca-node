@@ -11,7 +11,7 @@ const rps = {
         // 2 – Nota Fiscal Conjugada (Mista)
         // 3 – Cupom
     },
-    DataEmissao: '2024-05-01',
+    DataEmissao: '2024-09-30T11:10:00',
     NaturezaOperacao: '1',
     // 1 – Tributação no município
     // 2 - Tributação fora do município
@@ -31,22 +31,22 @@ const rps = {
     Status: '1', // 1 – Normal  2 – Cancelado
     Servico: {
         Valores: {
-            ValorServicos: '100.00',
+            ValorServicos: '1.00',
             ValorDeducoes: '0.00', // opcional
             ValorPis: '0.00', // opcional
             ValorCofins: '0.00', // opcional
             ValorInss: '0.00', // opcional
             ValorIr: '0.00', // opcional
             ValorCsll: '0.00', // opcional
-            IssRetido: '2.00', // 1 para ISS Retido - 2 para ISS não Retido,
+            IssRetido: '2', // 1 para ISS Retido - 2 para ISS não Retido,
             ValorIss: '0.00', // opcional
             OutrasRetencoes: '0.00', // opcional
             Aliquota: '0.00', // opcional
             DescontoIncondicionado: '0.00', // opcional
             DescontoCondicionado: '0.00', // opcional
         },
-        ItemListaServico: '1.07', // First 4 digits - https://notacarioca.rio.gov.br/files/leis/Resolucao_2617_2010_anexo2.pdf
-        CodigoTributacaoMunicipio: '522310000', // 6 digits - https://notacarioca.rio.gov.br/files/leis/Resolucao_2617_2010_anexo2.pdf
+        ItemListaServico: '1702', // First 4 digits - https://notacarioca.rio.gov.br/files/leis/Resolucao_2617_2010_anexo2.pdf
+        CodigoTributacaoMunicipio: '170201', // 6 digits - https://notacarioca.rio.gov.br/files/leis/Resolucao_2617_2010_anexo2.pdf
         Discriminacao: 'Teste de emissão de nota fiscal',
         CodigoMunicipio: '3304557',
     },
@@ -57,10 +57,10 @@ const rps = {
     Tomador: {
         IdentificacaoTomador: { // opcional
             CpfCnpj: {
-                Cnpj: '98051666000173'
+                Cpf: '15058023078'
             }
         },
-        RazaoSocial: 'Tomador de Teste', // opcional
+        RazaoSocial: 'João da Silva', // opcional
         Endereco: { // opcional
             Endereco: 'Rua do Tomador',
             Numero: '123',
@@ -84,14 +84,31 @@ const rps = {
     }
 };
 
-const certPath = getPathFromRoot('certificado-teste.pfx');
 
-const cnc = new GerarNotaCarioca('dev', rps);
+(async () => {
 
-const sh = new SoapHandler({ certPath: certPath, certPass: '123456' });
+    const certPath = await getPathFromRoot('certificado-teste.pfx');
 
-sh.send(cnc).then((response) => {
-    console.log('sucesso: ', response);
-}).catch((error) => {
-    console.error('erro: ', error);
-});
+    try {
+
+        const gnc = new GerarNotaCarioca('dev', rps);
+
+        const sh = new SoapHandler({ certPath: certPath, certPass: '123456' });
+
+        const responseXML = await sh.send(gnc);
+
+        console.log(responseXML);
+
+        const responseJson = sh.convertXmlToJson(responseXML);
+
+        const responseNota = sh.convertXmlToJson(responseJson['soap:Envelope']['soap:Body'][0].GerarNfseResponse[0].outputXML);
+
+        console.log(responseNota.GerarNfseResposta.CompNfse[0].Nfse[0].InfNfse);
+
+        console.log('Nota gerada com sucesso!');
+
+    } catch (e) {
+        console.log(e);
+    }
+
+})();
