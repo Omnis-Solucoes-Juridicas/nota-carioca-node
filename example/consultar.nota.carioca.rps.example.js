@@ -1,30 +1,25 @@
-const ConsultarNotaCarioca = require('../lib/services/ConsultarNotaCarioca');
+const ConsultarNotaCariocaRPS = require('../lib/services/ConsultarNotaCariocaRPS');
 const getPathFromRoot = require('../lib/utils/getPathFromRoot');
 const SoapHandler = require('../lib/utils/SoapHandler');
 
 const rps = {
+    IdentificacaoRps: {
+        Numero: '1',
+        Serie: 'ABC',
+        Tipo: '1'
+    },
     Prestador: {
         Cnpj: '12123736000136',
         InscricaoMunicipal: '12345678'
-    },
-    PeriodoEmissao: {
-        DataInicial: '2024-05-01',
-        DataFinal: '2024-05-31'
-    },
-    Tomador: {
-        CpfCnpj: {
-            Cnpj: '98051666000173'
-        }
     }
 };
 
 (async () => {
 
-    const certPath = getPathFromRoot('certificado-teste.pfx');
+    const certPath = await getPathFromRoot('certificado-teste.pfx');
 
     try {
-
-        const cnc = new ConsultarNotaCarioca('dev', rps);
+        const cnc = new ConsultarNotaCariocaRPS('dev', rps);
 
         const sh = new SoapHandler({ certPath: certPath, certPass: '123456' });
 
@@ -36,10 +31,9 @@ const rps = {
 
         const responseNota = sh.convertXmlToJson(responseJson['soap:Envelope']['soap:Body'][0].ConsultarNfsePorRpsResponse[0].outputXML);
 
-        console.log(responseNota.ConsultarNfseResposta.CompNfse[0].Nfse[0].InfNfse);
+        console.log(responseNota.ConsultarNfseRpsResposta.CompNfse[0].Nfse[0].InfNfse);
 
-        console.log('Nota consultada com sucesso!');
-
+        console.log('Nota consultada por RPS com sucesso!');
 
     } catch (e) {
         console.log(e)
