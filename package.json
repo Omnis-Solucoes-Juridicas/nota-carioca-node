@@ -1,11 +1,14 @@
 {
   "name": "nota-carioca",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Módulo para emissão de nota fiscal eletrônica no nota carioca.",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint lib example",
-    "lint-fix": "eslint lib example --fix"
+    "lint-fix": "eslint lib example --fix",
+    "release-major": "standard-version --release-as major",
+    "release-minor": "standard-version --release-as minor",
+    "release-patch": "standard-version --release-as patch"
   },
   "keywords": [
     "nota",
@@ -22,6 +25,7 @@
     "dotenv": "^16.4.5",
     "find-root": "^1.1.0",
     "node-forge": "^1.3.1",
+    "standard-version": "^9.5.0",
     "tmp": "^0.2.3",
     "winston": "^3.13.1",
     "xml2js": "^0.6.2"
