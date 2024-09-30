@@ -1,6 +1,6 @@
 {
   "name": "nota-carioca-node",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Módulo para emissão de nota fiscal eletrônica no nota carioca.",
   "main": "lib/index.js",
   "scripts": {
