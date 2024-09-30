@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint-fix": "eslint app tests --fix"
+    "lint": "eslint lib example",
+    "lint-fix": "eslint lib example --fix"
   },
   "keywords": [
     "nota",
