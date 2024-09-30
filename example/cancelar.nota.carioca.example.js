@@ -1,4 +1,4 @@
-const CancelarNota = require('../lib/services/CancelarNota');
+const CancelarNotaCarioca = require('../lib/services/CancelarNotaCarioca');
 const getPathFromRoot = require('../lib/utils/getPathFromRoot');
 const SoapHandler = require('../lib/utils/SoapHandler');
 
@@ -22,7 +22,7 @@ const rps = {
 
     try {
 
-        const cnc = new CancelarNota('dev', rps);
+        const cnc = new CancelarNotaCarioca('dev', rps);
 
         const sh = new SoapHandler({ certPath: certPath, certPass: '123456' });
 

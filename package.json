@@ -4,7 +4,6 @@
   "description": "Módulo para emissão de nota fiscal eletrônica no nota carioca.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint lib example",
     "lint-fix": "eslint lib example --fix"
   },
